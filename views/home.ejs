@@ -1,0 +1,118 @@
+<% layout("/layouts/boilerplate") %>
+<br>
+
+<div class="d-flex flex-column flex-md-row justify-content-end gap-2 mb-3 ">
+    <!--    ms-* = margin-start / margin left
+            me-* = margin-end / margin right
+    -->
+
+    <div class="btn-group me-3">
+        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            Availability
+        </button>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/">All Profiles</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="/?availability=weekends">Weekends</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="/?availability=weekdays">Weekdays</a></li>
+        </ul>
+    </div>
+    <div>
+        <form class="d-flex" role="search">
+        <input 
+            class="form-control me-2 w-75" 
+            name="skill"
+            type="search" 
+            placeholder="Search skill" 
+            aria-label="Search"
+            value="<%= skill || '' %>"
+        />
+         <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+    </div>
+</div>    
+<!-- col-12 col-md-2 means take full width i.e all 12 columns (i.e col-12) on <768px and take col-2 for medium(md) or greater than medium sizes i.e In bootstrap medium breakpoint(md) = 768px  -->
+<% for (let user of users){ %>
+
+    <div 
+    class="row cards mb-3" 
+    onclick="window.location='/profile/<%= user._id %>'"
+    style="cursor:pointer;"
+    >
+        
+        <div class="col-12 col-md-2 col1">
+            <img src="<%= user.profilePhoto.url %>">
+        </div>
+        <div class="col-12 col-md col2">
+            <h3 class="mb-3"><b><%= user.username %></b></h3>
+            <h6><b>Skills Offered :</b>
+            <% for(let skill of user.skillsOffered) { %>
+                <span class="badge rounded-pill text-bg-warning me-1">
+                    <%= skill %>
+                </span>
+            <% } %>
+            </h6>
+            <h6><b>Skills Wanted : </b>
+            <% for(let skill of user.skillsWanted){ %>
+                <span class="badge rounded-pill text-bg-warning me-1">
+                    <%= skill %>
+                </span>
+            <% } %>
+            </h6>
+        </div>
+        
+        <div class="col-12 col-md-3">
+            <a href="/profile/<%= user._id %>" class="text-decoration-none text-dark">
+                <button class="btn btn-primary mb-1">Request</button>
+            </a>
+            
+            <div class="d-flex  align-items-center gap-2 mt-3">
+                <% if (user.avgRating != 0){ %>
+                <h6 class="ms-2"><b>Rating : <%= user.avgRating %>/5 </b></h6>
+                <p class="starability-result" data-rating="<%= user.avgRating %>"></p></b>
+                <% }  else { %>
+                    <h6 class="ms-2">Unrated</h6>
+                <% } %>
+            </div>
+            
+        </div>
+        
+        
+    </div>
+    
+<% } %>
+ <nav aria-label="Profile pagination" class="mt-5">
+
+    <ul class="pagination justify-content-center">
+
+        <li
+            class="page-item <%= page === 1 ? 'disabled' : '' %>"
+        >
+            <a class="page-link" href="/?availability=<%= availability || '' %>&page=<%= page - 1 %>">Previous</a>
+        </li>
+
+        <% for(let i = 1; i <= totalPages; i++) { %>
+
+            <li
+                class="page-item <%= page === i ? 'active' : '' %>"
+            >
+                <a class="page-link" href="/?availability=<%= availability || '' %>&page=<%= i %>"><%= i %></a>
+            </li>
+
+        <% } %>
+
+        <li
+            class="page-item <%= page === totalPages ? 'disabled' : '' %>"
+        >
+            <a
+                class="page-link"
+                href="/?availability=<%= availability || '' %>&page=<%= page + 1 %>"
+            >
+                Next
+            </a>
+        </li>
+
+    </ul>
+
+</nav>       

@@ -1,0 +1,215 @@
+.plus-jakarta-sans {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400; 
+  font-style: normal; 
+}
+body{
+    font-family: "Plus Jakarta Sans", sans-serif !important;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container {
+    flex: 1 !important;
+}
+
+/* Navbar */
+.navbar1 {
+    margin-top: 0px;
+    min-height: 4rem;
+    background-color: #3d348b !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 1000 !important;
+}
+
+.navbar1 .nav-link,
+.navbar1 .navbar-brand {
+    color: white;
+}
+/* .nav-div{
+    display: flex;
+    justify-content: space-between;
+} */
+
+/* Following media query means 
+    For Mobile (< 992px): Let Bootstrap handle the layout.
+    For Desktop (≥ 992px): Use your custom flex layout. 
+*/
+@media (min-width: 992px) {
+    .nav-div {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+}
+.nav1 {
+    background-color: #3d348b !important;
+}
+.nav-profile-photo img{
+    border-radius: 50%;
+    height: 46px;
+    width: 46px;
+}
+
+
+/* .part1 {
+    background-color: rgb(213, 216, 222);
+} */
+.part2 {
+    display: block;
+}
+
+.part2 img{
+    height: 158px;
+    width: 149px;
+    border-radius: 50%;
+    border: 1px solid black;
+    margin: 2rem;
+}
+.part2 .btn1{
+    margin-top: 1rem;
+    margin-left: 3rem;
+}
+.ratings{
+    text-align: center;
+}
+.btns-container{
+    display: flex;
+}
+
+.options{
+    display: flex;
+}
+/* Homepage */
+.col1 img{
+    height: 89px;
+    width: 85px;
+    border-radius: 50%;
+    border: 1px solid black;
+    margin: 1rem;
+}
+.cards{
+    border-radius: 31px;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.feedback-button{
+    color: #110bb1 !important;
+    border: 1px solid #110bb1 !important;
+    background-color: white !important;
+}
+.feedback-button:hover{
+    background-color: #110bb1 !important;
+    color: white !important;
+}
+.feedback-card{
+    width: 100% !important;
+    border-radius: 51px !important; 
+    border: 2px solid rgb(225, 224, 224) !important;
+}
+.feedback-card:hover{
+    border: 4px solid rgb(210, 206, 206) !important;
+}
+.feedback-photo img{
+    height: 100px;
+    width: 100px;
+    border: 1px solid black;
+    border-radius: 50%;
+}
+.sidebar{
+    border:2px solid rgb(200, 197, 197);
+    border-radius: 10px;
+}
+.sidebar h6{
+    color: #3d348b;
+}
+.sidebar a{
+    text-decoration: none;
+    color: rgb(59, 59, 59);
+}
+.sidebar li :hover{
+    color: #110bb1;
+}
+.main-content{
+    border: 2px solid rgb(200, 197, 197);
+    border-radius: 10px;
+}
+.admin-dashboard {
+    width: 100% !important;
+    height: 100% !important;
+    flex: 1 !important;
+    display: flex;
+    min-height: calc(100vh - 4rem);
+}
+
+.admin-dashboard .row {
+    flex: 1;
+    width: 100%;
+}
+.sidebar,
+.main-content {
+    height: 100%;
+}
+ul {
+    list-style: none;
+    padding-left: 0rem !important;
+}
+.user-stats,
+.swap-stats,
+.ban-stats,
+.feedback-stats{
+    border: 1px solid rgb(191, 189, 189);
+    background-color: rgb(252, 244, 234);
+    border-radius: 10px;
+}
+.user-stats i{
+    color: #3d348b;
+}
+.swap-stats i{
+    color: green;
+}
+.ban-stats i{
+    color: red;
+}
+.feedback-stats i{
+    color: rgb(255, 149, 0);
+}
+/* .wrapTable table td,
+.table th {
+    white-space: nowrap !important;
+} */
+.wrapTable > table td,
+.wrapTable > table th {
+    white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        margin-bottom: 1rem;
+    }
+}
+.table-img img{
+    height: 2.5rem;
+    width: 2.5rem;
+    border-radius: 50%;
+    margin-right: 1rem;
+}
+.msg-form{
+    border: 2px solid rgb(200, 197, 197);
+    border-radius: 10px;
+}
+.message-cell {
+    white-space: normal !important;
+    word-break: break-word !important;
+}
+.announce-card{
+    background-color: rgb(248, 223, 149) !important;
+}
+.announce-card:hover{
+    border: 1px solid black !important;
+}

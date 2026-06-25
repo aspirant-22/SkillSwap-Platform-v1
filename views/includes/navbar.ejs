@@ -1,0 +1,87 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary navbar1">
+  <div class="container-fluid navbar1">
+    <a class="navbar-brand" href="#"><i class="fa-solid fa-user-graduate"></i>SkillSwap</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse nav-div nav1" id="navbarNav">
+      <div>
+        <ul class="navbar-nav">
+        <li class="nav-item">
+        <a class="nav-link" href="/">Home</a>
+        </li>
+      </ul>
+      </div>
+      <div>
+        <ul class="navbar-nav">
+          <% if (!currUser) { %>
+            <li>
+              <a class="nav-link" href="/signup">SignUp</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/login">Login</a>
+            </li>
+          <% } %>
+          
+            <% if(currUser && currUser.role === "user"){ %>
+            
+            <div class="d-flex justify-content-center-md align-items-center">
+              <li class="nav-item dropdown">
+                <a href="/announcements" class="nav-link me-3">
+                  <div class="position-relative">
+                    <i class="fa-solid fa-bell"></i>
+                    <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
+                      <span class="visually-hidden">unread messages</span>
+                    </span>
+                  </div>
+                </a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle nav-profile-photo" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <img src="<%= currUser.profilePhoto.url %>">
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end">
+                  <li><a class="dropdown-item" href="/profile/<%= currUser._id %>">My Profile</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="/profile">My Swaps</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="/logout"><i class="fa-solid fa-right-from-bracket"></i>Logout</a></li>
+                </ul>
+              </li>
+            </div>
+            
+            
+          <% } %>
+
+          <% if(currUser && currUser.role === "admin"){ %>
+            
+            <div class="d-flex justify-content-center-md align-items-center">
+              <li class="nav-item dropdown">
+                <a href="/announcements" class="nav-link me-3">
+                  <div class="position-relative">
+                    <i class="fa-solid fa-bell"></i>
+                    <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
+                      <span class="visually-hidden">unread messages</span>
+                    </span>
+                  </div>
+                </a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle nav-profile-photo" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <img src="<%= currUser.profilePhoto.url %>"> Admin
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end">
+                  <li><a class="dropdown-item" href="/admin">Admin Dashboard</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="/logout"><i class="fa-solid fa-right-from-bracket"></i>Logout</a></li>
+                </ul>
+              </li>
+            </div>
+            
+            
+          <% } %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>

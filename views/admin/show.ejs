@@ -1,0 +1,87 @@
+<% layout("/layouts/adminlayout.ejs") %>
+<div class="admin-dashboard">
+<div class="container-fluid px-3">
+    <div class="row h-100 gx-2">
+        <div class="col-md-2">
+            <div class="sidebar p-3">
+                <h6 class="mb-4"><b><i class="fa-solid fa-shield-halved"></i>Admin Dashboard</b></h6>
+                <p class="mb-4">MAIN</p>
+                <ul>
+                    <li><a href="/admin"><b><i class="fa-regular fa-house"></i> Dashboard</b></a></li>
+                    <hr>
+                    <li><a href="/admin?view=swaps"><b><i class="fa-solid fa-arrow-right-arrow-left"></i> All Swap Requests</b></a></li>
+                    <hr>
+                    <li><a href="/admin?view=users"><b><i class="fa-solid fa-user-group"></i> Manage Users</b></a></li>
+                    <hr>
+                    <li><a href="/admin?view=messages"><b><i class="fa-regular fa-message"></i> Platform Messages</b></a></li>
+                </ul>
+            </div>
+            
+        </div>
+        <div class="col-md-10">
+            <div class="main-content p-3">
+                <h3><b>Welcome back, Admin👋</b></h3>
+                <p>Here's what's happening on SkillSwap.</p>
+                <div class="row">
+                    <div class="col user-stats d-flex gap-2 justify-content-center align-items-center p-2 me-3 ms-3">
+                        <div class="d-flex align-items-center justify-content-center"><b><i class="fa-solid fa-users fa-2x"></i></b></div>
+                        <div class="d-flex justify-content-center align-items-center flex-column">
+                            <p class="mb-0">Total Users</p>
+                            <h2><b><%= totalUsers %></b></h2>
+                        </div>
+                    </div>
+                    <div class="col swap-stats d-flex gap-2 justify-content-center align-items-center p-2 me-3">
+                        <div class="d-flex align-items-center justify-content-center"><b><i class="fa-solid fa-arrow-right-arrow-left fa-2x"></i></b></div>
+                        <div class="d-flex justify-content-center align-items-center flex-column">
+                            <p class="mb-0">Total Swaps</p>
+                            <h2><b><%= totalSwaps %></b></h2>
+                        </div>
+                    </div>
+                    <div class="col ban-stats d-flex gap-2 justify-content-center align-items-center p-2 me-3">
+                        <div class="d-flex align-items-center justify-content-center"><b><i class="fa-solid fa-users-slash fa-2x"></i></b></div>
+                        <div class="d-flex justify-content-center align-items-center flex-column">
+                            <p class="mb-0">Banned Users</p>
+                            <h2><b><%= bannedUsers %></b></h2>
+                        </div>
+                    </div>
+                    <div class="col feedback-stats d-flex gap-2 justify-content-center align-items-center p-2 ">
+                        <div class="d-flex align-items-center justify-content-center"><b><i class="fa-solid fa-star fa-2x"></i></b></div>
+                        <div class="d-flex justify-content-center align-items-center flex-column">
+                            <p class="mb-0">Total Feedbacks</p>
+                            <h2><b><%= totalFeedbacks %></b></h2>
+                        </div>
+                    </div>
+                    
+                    <div class="col mt-4">
+                        <% if(!view){ %>
+                            <hr class="my-5">
+                            <%- include("showSwaps.ejs") %>
+
+                            <hr class="my-5">
+
+                            <%- include("showUsers.ejs") %>
+
+                            <hr class="my-5">
+
+                            <%- include("showMsgs.ejs") %>
+
+                        <% } %>
+                        <% if(view === "swaps"){ %>
+                            <%- include("showSwaps.ejs") %>
+                        <% } %>
+                        <% if (view === "users"){ %>
+                            <%- include("showUsers.ejs") %>
+                        <% } %>
+                        <% if (view === "messages"){ %>
+                            <%- include("showMsgs.ejs") %>
+                        <% } %>
+                    </div>
+                    
+                    
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

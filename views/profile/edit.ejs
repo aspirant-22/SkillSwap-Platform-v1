@@ -1,0 +1,115 @@
+<% layout("/layouts/boilerplate.ejs")%>
+<div class="row">
+     
+    <div class="col-9 offset-0 part1 mt-3">
+        <h3><b>Edit Your Profile</b></h3>
+        <br>
+        <form method="POST" action="/profile/<%= profile._id%>?_method=PATCH" novalidate class="needs-validation" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label  for="username" class="form-label"><b>Name</b></label>
+                <input 
+                    type="text" 
+                    name="user[username]"
+                    class="form-control"
+                    value="<%= profile.username %>" 
+                    required
+                >
+                <div class="invalid-feedback">Please enter your name</div>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label"><b>Email</b></label>
+                <input 
+                    type="email"
+                    name="user[email]"
+                    class="form-control"
+                    value="<%= profile.email %>"
+                    required
+                >
+                <div class="invalid-feedback">Email is required</div>
+            </div>
+            <div class="mb-3">
+                <label for="profilePhoto" class="form-label"><b>Change Profile Image</b></label>
+                <input 
+                    type="file"
+                    name="user[profilePhoto]"
+                    class="form-control"
+                >
+            </div>
+            <div class="mb-3">
+                <label for="location" class="form-label"><b>Location</b></label>
+                <input 
+                    type="text"
+                    name="user[location]"
+                    class="form-control"
+                    value="<%= profile.location %>"
+                >
+            </div>
+            <div class="row">
+                <div class="col mb-3"> 
+                    <label class="form-label"><b>Skills Offered</b></label>
+
+                    <select
+                        id="skillsOffered"
+                        name="user[skillsOffered][]"
+                        class="form-select"
+                        multiple
+                    >
+                        <% profile.skillsOffered.forEach(skill => { %>
+                            <option
+                                value="<%= skill %>"
+                                <%= profile.skillsOffered.includes(skill) ? "selected" : "" %>
+                            >
+                                <%= skill %>
+                            </option>
+                        <% }) %>
+                    </select>
+                </div>
+                <div class="col mb-3">
+                    <label class="form-label"><b>Skills Wanted</b></label>
+
+                    <select
+                        id="skillsWanted"
+                        name="user[skillsWanted][]"
+                        class="form-select"
+                        multiple
+                    >
+                        <% profile.skillsWanted.forEach(skill => { %>
+                            <option
+                                value="<%= skill %>"
+                                <%= profile.skillsWanted.includes(skill) ? "selected" : "" %>
+                            >
+                                <%= skill %>
+                            </option>
+                        <% }) %>
+                    </select>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="availability" class="form-label"><b>Availability</b></label>
+                <select class="form-select"  name="user[availability]" required>
+                    <option value="" selected disabled>Choose your availability</option>
+                    <option value="weekdays">Weekdays</option>
+                    <option value="weekends">Weekends</option>
+                </select>
+                <div class="invalid-feedback">Availability is Required</div>
+            </div>
+            <div class="mb-3">
+                <label for="visibility" class="form-label"><b>Profile Visibility</b></label>
+                <select class="form-select"  name="user[isPublic]" required>
+                    <option value="" selected disabled>Choose Visibility</option>
+                    <option value="true">Public</option>
+                    <option value="false">Private</option>
+                </select>
+                <div class="invalid-feedback">Profile Visibility is Required</div>
+            </div>
+        <button type="submit" class="btn btn-primary">Update Details</button>
+        </form>
+    </div>
+    <div class="col part2">
+        <img src="<%= profile.profilePhoto.url %>">
+        
+    </div>
+   
+</div>
+ <br><br>
+

@@ -1,0 +1,56 @@
+<div class="row gap-2">
+    <div class="col msg-form p-4">
+         <div class="d-flex justify-content-between align-items-center">
+            <h4 class="mb-4"><b>Manage Platform Messages</b></h4>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered border-secondary-subtle table-sm ">
+                <thead>
+                    <tr>
+                    <th scope="col" class="p-2">ID</th>
+                    <th scope="col" class="p-2 ">Title</th>
+                    <th scope="col" class="p-2 ">Message</th>
+                    <th scope="col" class="p-2">Posted By</th>
+                    <th scope="col" class="p-2">Date</th>
+                    <th scope="col" class="p-2">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% messages.forEach((msg , i) => { %>
+                        
+                        <tr>
+                            <td class="p-2"><%= i + 1 %></td>
+                            <td class="p-2"><b><%= msg.title %></b></td>
+                            <td class="p-2"><%= msg.message %></td>
+                            <td class="p-2"><%= msg.createdBy.username %></td>
+                            <td class="p-2"><%= msg.createdAt.toLocaleDateString() %></td>
+                            <form method="POST" action="/admin/<%= msg._id %>/messages?_method=DELETE">
+                                <td class="p-2"><button class="btn btn-dark btn-sm">Delete</button></td>
+                            </form>
+                        </tr>
+                        
+                    <% }) %>
+                        
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col msg-form p-4">
+        <h4 class="mb-4"><b>Send Platform Message</b></h4>
+        <form method="POST" action="/admin/messages" novalidate class="needs-validation">
+            <label for="title" class="form-label">Title</label>
+            <input 
+                id="title" 
+                class="form-control mb-2" 
+                name="adminMessage[title]"
+                type="text"
+                required
+            >
+            <label for="msg" class="form-label">Message</label>
+            <textarea class="form-control" id="msg" name="adminMessage[message]" rows="4" placeholder="Draft a message" required></textarea>
+            <button class="btn feedback-button mt-3">Send Message</button>
+        
+        </form>
+    </div>
+</div>

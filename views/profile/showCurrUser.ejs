@@ -1,0 +1,353 @@
+<% layout("/layouts/boilerplate.ejs") %>
+
+<div class="d-flex flex-column flex-md-row justify-content-end gap-2 mb-3 mt-1" >
+    <div class="btn-group me-3">
+        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><%= status || "All Requests" %></button>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/swaps?status=pending">Pending</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="/swaps?status=rejected">Rejected</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="/swaps?status=accepted">Accepted</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="/swaps?status=completed">Completed</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="/swaps">All Requests</a></li>
+        </ul>
+    </div>
+    <div>
+        <form class="d-flex" role="search">
+        <input 
+            class="form-control me-2 w-75" 
+            name="skill"
+            type="search" 
+            placeholder="Search skill" 
+            aria-label="Search"
+            value="<%= skill || '' %>"
+        />
+         <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+    </div>
+</div>
+<% if(swaps.length === 0){ %> 
+    <div class="alert alert-info text-center mt-4">
+        <% if(status){ %>
+            No <%= status %> swap requests found.
+        <% } else { %>
+            No swap requests found.
+        <% } %>
+    </div>
+<% } %>
+<% for (let swap of swaps){ %>
+   
+    <!-- If user has send a swap request -->
+    <% if(currUser._id.equals(swap.sender._id)){ %>
+        <div>
+        <div class="row cards mb-3" >
+            <div class="col-12 col-md-2 col1">
+                <img src="<%= swap.receiver.profilePhoto.url %>">
+                
+                
+            </div>
+            <div class="col-12 col-md col2 mt-3">
+                <h3 class="mb-4"><b><%= swap.receiver.username %></b></h3>
+                <h6><b>Skills Offered by you :</b>
+                
+                <span class="badge rounded-pill text-bg-warning me-1">
+                    <%= swap.offeredSkill %>
+                </span>
+                
+                </h6>
+                <h6><b>Skills You Wanted : </b>
+                <span class="badge rounded-pill text-bg-warning me-1">
+                    <%= swap.requestedSkill %>
+                </span>
+                
+                </h6>
+            </div>    
+            <div class="col-12 col-md-4">
+                <div class="d-flex gap-2">
+                    <h6 class="mb-3"><b>Status : </b></h6>
+        
+                    <% if(swap.status == "pending"){ %>
+                        <h6 class="text-secondary"><b>Pending</b></h6>
+                    <% } %>
+                    <% if(swap.status == "accepted"){ %>
+                        <h6 class="text-success"><b>Accepted</b></h6>
+                    <% } %>
+                    <% if(swap.status == "rejected"){ %>
+                        <h6 class="text-danger"><b>Rejected</b></h6><br>
+                    <% } %>
+                    <% if(swap.status == "completed"){ %>
+                        <h6 class="text-warning"><b>Completed</b></h6>
+                    <% } %>
+                </div>
+                <% if (swap.status == "pending" || swap.status == "rejected" ){ %>
+                    <form method="POST" action="/swaps/<%= swap._id %>?_method=DELETE">
+                        <button class="btn btn-dark mb-2">Delete <i class="fa-solid fa-trash"></i></button>
+                    </form>
+                <% } %>
+                <% if (swap.status == "accepted" && swap.senderCompleted == false){ %>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-success mb-2" data-bs-toggle="modal" data-bs-target="#completeSwapModal-<%= swap._id %>">
+                    <i class="fa-regular fa-circle-check"></i>Mark as Complete
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="completeSwapModal-<%= swap._id %>" tabindex="-1" aria-labelledby="completeSwapModalLabel-<%= swap._id %>" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="completeSwapModalLabel-<%= swap._id %>"><b>Mark as Completed?</b></h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Are you sure you want to mark this swap as completed?</p>
+                            <p><b>Once both users mark it as completed, the swap will be <b>closed.</b></p>
+                        </div>
+                        <div class="d-flex modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <form method="POST" action="/swaps/<%= swap._id %>/complete?_method=PATCH">
+                                <button class="btn btn-success">Yes, Mark as Completed</button>
+                            </form>
+                            
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                <% } %>
+                <% if (swap.status == "completed"){ %>
+
+                    <!-- Button trigger Feedback modal -->
+                    <% if (swap.status === "completed" && !feedbackGivenForSwap.has(swap._id.toString())){ %>
+                        <button class="btn mb-3 feedback-button" data-bs-toggle="modal" data-bs-target="#feedbackModal-<%= swap._id %>"><i class="fa-regular fa-star"></i> Give Feedback</button>
+                    
+                        <!-- Modal -->
+                        <div class="modal fade" id="feedbackModal-<%= swap._id %>" tabindex="-1" aria-labelledby="feedbackModalLabel-<%= swap._id %>" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="feedbackModalLabel-<%= swap._id %>"><b>Give Feedback</b></h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <form method="POST" action="/feedback">
+                                <div class="modal-body">
+                                    <div>
+                                        <input
+                                            type="hidden"
+                                            name="feedback[swapId]"
+                                            value="<%= swap._id %>"
+                                        >
+                                    </div>
+                                    <div>
+                                        <input
+                                            type="hidden"
+                                            name="feedback[receiver]"
+                                            value="<%= swap.receiver._id %>"
+                                        >
+                                    </div>
+                                    <h6 class="mb-3"><b>Rate <%= swap.receiver.username %></b></h6>
+                                    <fieldset class="starability-coinFlip">
+                                        <input type="radio" id="first-rate1-<%= swap._id %>" name="feedback[rating]" value="1" />
+                                        <label for="first-rate1-<%= swap._id%>" title="Terrible">1 star</label>
+                                        <input type="radio" id="first-rate2-<%= swap._id%>" name="feedback[rating]" value="2" />
+                                        <label for="first-rate2-<%= swap._id%>" title="Not good">2 stars</label>
+                                        <input type="radio" id="first-rate3-<%= swap._id%>" name="feedback[rating]" value="3" />
+                                        <label for="first-rate3-<%= swap._id%>" title="Average">3 stars</label>
+                                        <input type="radio" id="first-rate4-<%= swap._id%>" name="feedback[rating]" value="4" />
+                                        <label for="first-rate4-<%= swap._id%>" title="Very good">4 stars</label>
+                                        <input type="radio" id="first-rate5-<%= swap._id%>" name="feedback[rating]" value="5" />
+                                        <label for="first-rate5-<%= swap._id%>" title="Amazing">5 stars</label>
+                                    </fieldset>
+                                    <div class="mb-3">
+                                        <label for="message" class="form-label" id="message"><b>Your Feedback</b></label>
+                                        <textarea class="form-control" id="message" name="feedback[message]" rows="5" placeholder="Share your experience working with <%= swap.receiver.username %>..." required></textarea>
+
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                    
+                                    <button type="submit" class="btn btn-primary">Submit Feedback</button>
+                                    
+
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                        </div>
+                    <% } %>
+                <% } %>
+                
+            </div>
+            <% if (swap.status === "completed"){ %>
+                <div class="d-flex  align-items-center gap-2 mt-3">
+                    <h6 class="ms-2"><b>Rating : <%= swap.receiver.avgRating %>/5 </h6>
+                    <p class="starability-result" data-rating="<%= swap.receiver.avgRating %>"></p></b>
+                </div>
+            <% } %>
+            
+        </div>
+        </div>
+    <% } %>
+    <!-- If user had received a swap request -->
+    <% if(currUser._id.equals(swap.receiver._id)){ %>
+        <div class="row cards mb-3" >
+            <div class="col-12 col-md-2 feedback-photo mt-2">
+                <img src="<%= swap.sender.profilePhoto.url %>">
+            </div>
+            <div class="col-12 col-md col2 mt-1">
+                <h3 class="mb-4"><b><%= swap.sender.username %></b></h3>
+                <h6><b>Skills Offered to you :</b>
+                
+                <span class="badge rounded-pill text-bg-warning me-1">
+                    <%= swap.offeredSkill %>
+                </span>
+                
+                </h6>
+                <h6><b>Skills Wanted from You : </b>
+                <span class="badge rounded-pill text-bg-warning me-1">
+                    <%= swap.requestedSkill %>
+                </span>
+                
+                </h6>
+            </div>    
+            <div class="col-12 col-md-4  mt-1">
+                <div class="d-flex gap-2 mt-2">
+                    <h6 class="mb-3"><b>Status : </b></h6>
+        
+                    <% if(swap.status == "pending"){ %>
+                        <h6 class="text-secondary"><b>Pending</b></h6>
+                    <% } %>
+                    <% if(swap.status == "accepted"){ %>
+                        <h6 class="text-success"><b>Accepted</b></h6>
+                    <% } %>
+                    <% if(swap.status == "rejected"){ %>
+                        <h6 class="text-danger"><b>Rejected</b></h6>
+                    <% } %>
+                    <% if(swap.status == "completed"){ %>
+                        <h6 class="text-warning"><b>Completed</b></h6>
+                    <% } %>
+                </div>
+                
+                <div class="d-flex gap-2 mt-2">
+                    <% if (swap.status == "pending"){ %>
+                        <form method="POST" action="/swaps/<%= swap._id %>/accept?_method=PATCH">
+                            <button class="btn btn-outline-success mb-3 me-2">Accept</button>
+                        </form>
+                        <form method="POST" action="/swaps/<%= swap._id %>/reject?_method=PATCH">
+                            <button class="btn btn-outline-danger mb-3">Reject</button>
+                        </form>
+                    <% } %>
+                </div>
+                
+                <% if (swap.status == "accepted" && swap.receiverCompleted == false){ %>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-success mb-2" data-bs-toggle="modal" data-bs-target="#completeSwapModal">
+                    <i class="fa-regular fa-circle-check"></i>Mark as Complete
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="completeSwapModal" tabindex="-1" aria-labelledby="completeSwapModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="completeSwapModalLabel"><b>Mark as Completed?</b></h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Are you sure you want to mark this swap as completed?</p>
+                                <p><b>Once both users mark it as completed, the swap will be <b>closed.</b></p>
+                            </div>
+                            <div class="d-flex modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <form method="POST" action="/swaps/<%= swap._id %>/complete?_method=PATCH">
+                                    <button class="btn btn-success">Yes, Mark as Completed</button>
+                                </form>
+                                
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
+                
+                <div>
+                    <% if (swap.status == "completed"){ %>
+                    <!-- Button trigger Feedback modal -->
+                    
+                        <% if (swap.status === "completed" && !feedbackGivenForSwap.has(swap._id.toString())){ %>
+                            <button class="btn mb-3 feedback-button" data-bs-toggle="modal" data-bs-target="#feedbackModal-<%= swap._id %>"><i class="fa-regular fa-star"></i> Give Feedback</button>
+                        
+                        
+                            <!-- Modal -->
+                            <div class="modal fade" id="feedbackModal-<%= swap._id %>" tabindex="-1" aria-labelledby="feedbackModalLabel-<%= swap._id %>" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="feedbackModalLabel-<%= swap._id %>"><b>Give Feedback</b></h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <form method="POST" action="/feedback">
+                                    <div class="modal-body">
+                                        <div>
+                                            <input
+                                                type="hidden"
+                                                name="feedback[swapId]"
+                                                value="<%= swap._id %>"
+                                            >
+                                        </div>
+                                        <div>
+                                            <input
+                                                type="hidden"
+                                                name="feedback[receiver]"
+                                                value="<%= swap.sender._id %>"
+                                            >
+                                        </div>
+                                        <h6 class="mb-3"><b>Rate <%= swap.sender.username %></b></h6>
+                                        <fieldset class="starability-coinFlip">
+                                            <input type="radio" id="first-rate1-<%= swap._id %>" name="feedback[rating]" value="1" />
+                                            <label for="first-rate1-<%= swap._id %>" title="Terrible">1 star</label>
+                                            <input type="radio" id="first-rate2-<%= swap._id %>" name="feedback[rating]" value="2" />
+                                            <label for="first-rate2-<%= swap._id %>" title="Not good">2 stars</label>
+                                            <input type="radio" id="first-rate3-<%= swap._id %>" name="feedback[rating]" value="3" />
+                                            <label for="first-rate3-<%= swap._id %>" title="Average">3 stars</label>
+                                            <input type="radio" id="first-rate4-<%= swap._id %>" name="feedback[rating]" value="4" />
+                                            <label for="first-rate4-<%= swap._id %>" title="Very good">4 stars</label>
+                                            <input type="radio" id="first-rate5-<%= swap._id %>" name="feedback[rating]" value="5" />
+                                            <label for="first-rate5-<%= swap._id %>" title="Amazing">5 stars</label>
+                                        </fieldset>
+                                        <div class="mb-3">
+                                            <label for="message" class="form-label" id="message"><b>Your Feedback</b></label>
+                                            <textarea class="form-control" id="message" name="feedback[message]" rows="5" placeholder="Share your experience working with <%= swap.sender.username %>..." required></textarea>
+
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                        
+                                        <button type="submit" class="btn btn-primary">Submit Feedback</button>
+                                        
+
+                                    </div>
+                                    </form>
+                                </div>
+                            </div>
+                            </div>
+                        <% } %>
+                    <% } %>
+                </div>
+                <br>
+            </div>
+            <% if(swap.status === "completed"){ %>
+                <div class="d-flex  align-items-center gap-2 mt-3">
+                    <h6 class="ms-2"><b>Rating : <%= swap.sender.avgRating %>/5 </h6>
+                    <p class="starability-result" data-rating="<%= swap.sender.avgRating %>"></p></b>
+                </div>
+            <% } %>
+        </div>
+    <% } %>
+    
+    
+<% } %>
+
+ 

@@ -1,0 +1,68 @@
+<div>
+     <div class="d-flex justify-content-between align-items-center">
+        <h4 class="mb-4"><b>Manage Users</b></h4>
+        <form method="GET" action="/admin/reports/users">
+            <button class="btn btn-outline-primary-subtle" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Download Users Report"><i class="fa-solid fa-download"></i></button>
+        </form>
+        
+    </div>
+    
+    <div class="table-responsive wrapTable">
+        <table class="table table-bordered border-secondary-subtle table-sm ">
+            <thead>
+                <tr>
+                <th scope="col" class="p-2">User</th>
+                <th scope="col" class="p-2 ">Email</th>
+                <th scope="col" class="p-2 ">Location</th>
+                <th scope="col" class="p-2">Availability</th>
+                <th scope="col" class="p-2">Public Profile</th>
+                <th scope="col" class="p-2">Status</th>
+                <th scope="col" class="p-2">Rating</th>
+                <th scope="col" class="p-2">Joined At</th>
+                <th scope="col" class="p-2">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% users.forEach((user) => { %>
+                    <% if (user.role === "user"){ %>
+                        <tr>
+                            <td class="p-2 table-img"><img src="<%= user.profilePhoto.url %>"> <%= user.username %></td>
+                            <td class="p-2"><%= user.email %></td>
+                            <td class="p-2"><%= user.location %></td>
+                            <td class="p-2"><%= user.availability %></td>
+                            <%  if (user.isPublic === true){ %>
+                                <td class="p-2">Yes</td>
+                            <% } %>
+                            <% if (user.isPublic === false){ %>
+                                <td class="p-2">No</td>
+                            <% } %>
+                            <td class="p-2">
+                                <% if (user.isBanned === false){ %>
+                                    <span class="badge text-bg-success">Active</span>
+                                <% } %>
+                                <% if (user.isBanned === true){ %>
+                                    <span class="badge text-bg-danger">Banned</span>
+                                <% } %>
+                            </td>
+                            <td class="p-2"><%= user.avgRating %></td>
+                            <td class="p-2"><%= user.createdAt.toLocaleDateString() %></td>
+                            <% if (user.isBanned != true){ %>
+                                <form method="POST" action="/admin/users/<%= user._id %>/ban?_method=PATCH">
+                                    <td class="p-2"><button class="btn btn-outline-danger btn-sm"><b>Ban User</b></button></td>
+                                </form>
+                                
+                            <% } else { %>
+                                <form method="POST" action="/admin/users/<%= user._id %>/unban?_method=PATCH">
+                                    <td class="p-2"><button class="btn btn-outline-success btn-sm"><b>Unban User</b></button></td>
+                                </form>
+                                
+                            <% } %>
+                        </tr>
+                    <% } %>
+                <% }) %>
+                    
+                
+            </tbody>
+        </table>
+    </div>
+</div>

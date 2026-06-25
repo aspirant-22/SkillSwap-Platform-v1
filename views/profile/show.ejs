@@ -1,0 +1,111 @@
+<% layout("/layouts/boilerplate") %>
+<br>
+<div class="btns-container">
+    <% if (currUser && ! (currUser._id.equals(profile._id))){ %>
+
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#swapModal">Request Swap</button>
+
+        <!-- Modal -->
+        <form method="POST" action="/swaps" novalidate class="needs-validation">
+            <div class="modal fade" id="swapModal" tabindex="-1" aria-labelledby="swapModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="swapModalLabel">Send Swap Request To : <b><%= profile.username %></b></h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div>
+                                <input
+                                    type="hidden"
+                                    name="swap[receiver]"
+                                    value="<%= profile._id %>"
+                                >
+                            </div>
+                            <div>
+                                <label for="offeredSkill" class="form-label">Choose one of your offered skills</label>
+                                <select class="form-select form-select-md " name="swap[offeredSkill]" required>
+                                    <option value="" selected disabled></option>
+                                    <% for (let skill of currUser.skillsOffered){ %>
+                                        <option value="<%= skill %>"><%= skill %></option>
+                                    <% } %>
+                                </select>
+                                <div class="invalid-feedback">Please select a skill</div>
+                            </div>
+                            <br>
+                            <div>
+                                <label for="requestedSkill" class="form-label">Choose one of <%= profile.username %>'s offered skills</label>
+                                <select class="form-select form-select-md " name="swap[requestedSkill]" required>
+                                    <option value="" selected disabled></option>
+                                    <% for (let skill of profile.skillsOffered){ %>
+                                        <option value="<%= skill %>"><%= skill %></option>
+                                    <% } %>
+                                </select>
+                                <div class="invalid-feedback">Please select a skill</div>
+                            </div>
+                            <br>
+                            <label for="message" class="form-label">Message</label>
+                            <textarea class="form-control" id="message" name="swap[message]" rows="4" placeholder="Draft a message"></textarea>
+                        </div>
+                        <div class="d-flex justify-content-center modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Discard</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    <% } %>  
+    <% if (currUser && currUser._id.equals(profile._id)){ %>
+        <form method="GET" action="/profile/<%= profile._id %>/edit">
+            <button class="btn btn-secondary">Edit Profile</button>
+        </form>
+    <% } %>
+</div>
+
+<div class="row">
+    <div class="col-9">
+        <br><br>
+        <h1><b><%= profile.username %></b></h1>
+        <br>
+        <h5 class="mb-3"><b>Skills Offered : </b><%= profile.skillsOffered %></h5>
+        <h5 class="mb-1"><b>Skills Wanted : </b><%= profile.skillsWanted %></h5>
+    </div>
+    <div class="col part2"> 
+        <img src= <%= profile.profilePhoto.url %>>
+    </div>
+</div>
+<hr>
+<div class="row ratings">
+    <h3><b>Ratings and Feedback</b></h3>
+    <br><br>
+    <% for (let feedback of feedbacks){ %>
+        <div class="card mb-3 feedback-card">
+            <div class="row card-body">
+                <div class="col-12 col-md-2 feedback-photo d-flex align-items-center">
+                    <img src="<%= feedback.giver.profilePhoto.url %>">
+                </div>
+                <div class="col-12 col-md mt-3 d-flex flex-column align-items-start">
+                    <h5 class="card-title"><b><%= feedback.giver.username %></b></h5>
+                    <div class="d-flex align-items-center">
+                        <p class="starability-result" data-rating="<%= feedback.rating %>"></p></b>
+                        <h6 class="ms-2"><b> <%= feedback.rating %>/5 </b> </h6>
+                    </div>
+                    <p class="card-text"><%= feedback.message %></p>
+                </div>
+                <div class="col-12  col-md-2 d-flex mt-2">
+                    <p><%= feedback.createdAt.toLocaleDateString("en-GB", 
+                        {
+                            day: "numeric",
+                            month: "long",
+                            year: "numeric"
+                        }) %>
+                    </p>
+                </div>
+            </div>
+        </div>
+    <% } %>
+    
+</div>

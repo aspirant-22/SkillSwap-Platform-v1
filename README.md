@@ -13,7 +13,7 @@
 ## 🌐 Live Demo
 
 🔗 **Deployed Application:**
-[https://your-deployed-link.com](https://skillswap-platform-v1.onrender.com/)
+[SkillSwap Platform](https://skillswap-platform-v1.onrender.com/)
 
 📂 **GitHub Repository:**
 https://github.com/aspirant-22/SkillSwap-Platform-v1

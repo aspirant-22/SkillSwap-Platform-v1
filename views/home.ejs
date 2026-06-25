@@ -70,8 +70,8 @@
             
             <div class="d-flex  align-items-center gap-2 mt-3">
                 <% if (user.avgRating != 0){ %>
-                <h6 class="ms-2"><b>Rating : <%= user.avgRating.toFixed(1) %>/5 </b></h6>
-                <p class="starability-result" data-rating="<%= user.avgRating.toFixed(1) %>"></p></b>
+                <h6 class="ms-2"><b>Rating : <%= Math.round(user.avgRating) %>/5 </b></h6>
+                <p class="starability-result" data-rating="<%= Math.round(user.avgRating) %>"></p></b>
                 <% }  else { %>
                     <h6 class="ms-2">Unrated</h6>
                 <% } %>

@@ -182,8 +182,8 @@
             </div>
             <% if (swap.status === "completed"){ %>
                 <div class="d-flex  align-items-center gap-2 mt-3">
-                    <h6 class="ms-2"><b>Rating : <%= swap.receiver.avgRating.toFixed(1) %>/5 </h6>
-                    <p class="starability-result" data-rating="<%= swap.receiver.avgRating.toFixed(1) %>"></p></b>
+                    <h6 class="ms-2"><b>Rating : <%= Math.round(swap.receiver.avgRating) %>/5 </h6>
+                    <p class="starability-result" data-rating="<%= Math.round(swap.receiver.avgRating) %>"></p></b>
                 </div>
             <% } %>
             
@@ -340,8 +340,8 @@
             </div>
             <% if(swap.status === "completed"){ %>
                 <div class="d-flex  align-items-center gap-2 mt-3">
-                    <h6 class="ms-2"><b>Rating : <%= swap.sender.avgRating.toFixed(1) %>/5 </h6>
-                    <p class="starability-result" data-rating="<%= swap.sender.avgRating.toFixed(1) %>"></p></b>
+                    <h6 class="ms-2"><b>Rating : <%= Math.round(swap.sender.avgRating) %>/5 </h6>
+                    <p class="starability-result" data-rating="<%= Math.round(swap.sender.avgRating) %>"></p></b>
                 </div>
             <% } %>
         </div>

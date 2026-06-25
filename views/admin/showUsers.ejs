@@ -44,7 +44,7 @@
                                     <span class="badge text-bg-danger">Banned</span>
                                 <% } %>
                             </td>
-                            <td class="p-2"><%= user.avgRating %></td>
+                            <td class="p-2"><%= user.avgRating.toFixed(1) %></td>
                             <td class="p-2"><%= user.createdAt.toLocaleDateString() %></td>
                             <% if (user.isBanned != true){ %>
                                 <form method="POST" action="/admin/users/<%= user._id %>/ban?_method=PATCH">

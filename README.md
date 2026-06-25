@@ -1,3 +1,4 @@
+<img width="960" height="540" alt="Screenshot 2026-06-25 115903" src="https://github.com/user-attachments/assets/a709c32e-4223-401e-86f0-838ddcd13c84" />
 # 🚀 SkillSwap – Learn, Teach & Grow Together
 
 ![MERN Stack](https://img.shields.io/badge/MERN-FullStack-success)
@@ -282,21 +283,24 @@ By eliminating financial barriers and enabling peer-to-peer learning, SkillSwap 
 
 ## Home Page
 
-*Add screenshot here*
+<img width="500" height="500" alt="Screenshot 2026-06-25 115903" src="https://github.com/user-attachments/assets/6bf66ccf-4981-4a99-8b11-a703d71a76ae" />
+
 
 ## User Profile
 
-*Add screenshot here*
+<img width="500" height="500" alt="Screenshot 2026-06-25 120115" src="https://github.com/user-attachments/assets/6165278f-63b4-40d5-ab81-48ebad50a434" />
 
 ## Swap Requests
 
-*Add screenshot here*
+<img width="500" height="500" alt="Screenshot 2026-06-25 120425" src="https://github.com/user-attachments/assets/8bc4848a-9ec1-42e6-975f-be262523ee20" />
+
 
 ## Admin Dashboard
 
-*Add screenshot here*
+<img width="500" height="500" alt="Screenshot 2026-06-25 120756" src="https://github.com/user-attachments/assets/d6261c88-e01e-4b51-98d9-7d8473e3fe8f" />
+<img width="500" height="500" alt="Screenshot 2026-06-25 120736" src="https://github.com/user-attachments/assets/6a96aff9-7cf9-46d4-a929-3a799ff00625" />
+<img width="500" height="500" alt="Screenshot 2026-06-25 121456" src="https://github.com/user-attachments/assets/48bc50d9-2ccf-476a-934c-ee67cee74cc8" />
 
----
 
 # ⚙️ Installation
 

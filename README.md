@@ -1,4 +1,3 @@
-<img width="960" height="540" alt="Screenshot 2026-06-25 115903" src="https://github.com/user-attachments/assets/a709c32e-4223-401e-86f0-838ddcd13c84" />
 # 🚀 SkillSwap – Learn, Teach & Grow Together
 
 ![MERN Stack](https://img.shields.io/badge/MERN-FullStack-success)

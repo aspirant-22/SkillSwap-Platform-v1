@@ -297,11 +297,6 @@ By eliminating financial barriers and enabling peer-to-peer learning, SkillSwap 
 <img width="960" height="540" alt="Screenshot 2026-06-26 210320" src="https://github.com/user-attachments/assets/ebfb2162-6dfe-4dbc-9abf-c6cfde1a65db" />
 
 
-# Rating and Feedback
-### ( After successful completion of swap by both users)
-<img width="960" height="540" alt="Screenshot 2026-06-25 154602" src="https://github.com/user-attachments/assets/bd90a5e1-9d19-43fd-90bb-3c1e065bca86" />
-
-
 
 ## Admin Dashboard
 <img width="960" height="540" alt="Screenshot 2026-06-26 203755" src="https://github.com/user-attachments/assets/79a4830f-15a4-4b9a-8298-53fff2d68618" />
@@ -312,6 +307,9 @@ By eliminating financial barriers and enabling peer-to-peer learning, SkillSwap 
 # Platform Announcements
 <img width="960" height="540" alt="Screenshot 2026-06-26 203904" src="https://github.com/user-attachments/assets/4e6ebed9-9b23-4e51-ac63-16b6f8b796cf" />
 
+# Rating and Feedback
+### ( After successful completion of swap by both users)
+<img width="960" height="540" alt="Screenshot 2026-06-25 154602" src="https://github.com/user-attachments/assets/bd90a5e1-9d19-43fd-90bb-3c1e065bca86" />
 
 
 # ⚙️ Installation

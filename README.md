@@ -1,6 +1,6 @@
 # 🚀 SkillSwap – Learn, Teach & Grow Together
 
-![MERN Stack](https://img.shields.io/badge/MERN-FullStack-success)
+![FullStack Stack](https://img.shields.io/badge/FullStack-success)
 ![MongoDB](https://img.shields.io/badge/Database-MongoDB-green)
 ![Node.js](https://img.shields.io/badge/Backend-Node.js-brightgreen)
 ![Express.js](https://img.shields.io/badge/Framework-Express.js-black)
@@ -22,7 +22,7 @@ https://github.com/aspirant-22/SkillSwap-Platform-v1
 
 # 📖 Overview
 
-SkillSwap is a full-stack MERN application designed to solve a real-world challenge: **making quality learning accessible without financial barriers.**
+SkillSwap is a full-stack application designed to solve a real-world challenge: **making quality learning accessible without financial barriers.**
 
 Instead of paying for expensive courses, users can connect with individuals who possess complementary skills and engage in mutually beneficial skill exchanges.
 
@@ -195,8 +195,7 @@ Client (EJS + Bootstrap)
 
 ## Deployment
 
-* Render / Vercel
-* GitHub
+* Render
 
 ---
 
@@ -282,23 +281,37 @@ By eliminating financial barriers and enabling peer-to-peer learning, SkillSwap 
 
 ## Home Page
 
-<img width="960" height="540" alt="Screenshot 2026-06-25 115903" src="https://github.com/user-attachments/assets/6bf66ccf-4981-4a99-8b11-a703d71a76ae" />
+<img width="960" height="540" alt="Screenshot 2026-06-25 153913" src="https://github.com/user-attachments/assets/0287f199-d71b-4c90-9b7b-965112bfce50" />
+
 
 
 ## User Profile
+<img width="960" height="540" alt="Screenshot 2026-06-26 212239" src="https://github.com/user-attachments/assets/69cfdd2c-0ce1-488d-aeb3-29659468f062" />
 
-<img width="960" height="540" alt="Screenshot 2026-06-25 120115" src="https://github.com/user-attachments/assets/6165278f-63b4-40d5-ab81-48ebad50a434" />
+
 
 ## Swap Requests
+<img width="960" height="540" alt="Screenshot 2026-06-26 210030" src="https://github.com/user-attachments/assets/5518954c-954a-47f1-a1f6-0555d1d557f1" />
+<img width="960" height="540" alt="Screenshot 2026-06-26 210228" src="https://github.com/user-attachments/assets/23f5d766-488a-4fe2-9351-22cf5f2684a2" />
+<img width="960" height="540" alt="Screenshot 2026-06-26 210239" src="https://github.com/user-attachments/assets/f3884f1b-3a12-4eeb-91bd-f75bc02a8779" />
+<img width="960" height="540" alt="Screenshot 2026-06-26 210320" src="https://github.com/user-attachments/assets/ebfb2162-6dfe-4dbc-9abf-c6cfde1a65db" />
 
-<img width="960" height="540" alt="Screenshot 2026-06-25 120425" src="https://github.com/user-attachments/assets/8bc4848a-9ec1-42e6-975f-be262523ee20" />
+
+# Rating and Feedback
+### ( After successful completion of swap by both users)
+<img width="960" height="540" alt="Screenshot 2026-06-25 154602" src="https://github.com/user-attachments/assets/bd90a5e1-9d19-43fd-90bb-3c1e065bca86" />
+
 
 
 ## Admin Dashboard
+<img width="960" height="540" alt="Screenshot 2026-06-26 203755" src="https://github.com/user-attachments/assets/79a4830f-15a4-4b9a-8298-53fff2d68618" />
+<img width="960" height="540" alt="Screenshot 2026-06-26 203809" src="https://github.com/user-attachments/assets/96fd57a6-b189-492c-bbfc-93ddc3c342d0" />
+<img width="960" height="540" alt="Screenshot 2026-06-26 203828" src="https://github.com/user-attachments/assets/83aa22aa-50f5-4aa4-bbd9-729f97387bec" />
+<img width="960" height="540" alt="Screenshot 2026-06-26 203840" src="https://github.com/user-attachments/assets/d09d19fd-0499-4d1f-abf5-86f56f015c33" />
 
-<img width="960" height="540" alt="Screenshot 2026-06-25 120756" src="https://github.com/user-attachments/assets/d6261c88-e01e-4b51-98d9-7d8473e3fe8f" />
-<img width="960" height="540" alt="Screenshot 2026-06-25 120736" src="https://github.com/user-attachments/assets/6a96aff9-7cf9-46d4-a929-3a799ff00625" />
-<img width="960" height="540" alt="Screenshot 2026-06-25 121456" src="https://github.com/user-attachments/assets/48bc50d9-2ccf-476a-934c-ee67cee74cc8" />
+# Platform Announcements
+<img width="960" height="540" alt="Screenshot 2026-06-26 203904" src="https://github.com/user-attachments/assets/4e6ebed9-9b23-4e51-ac63-16b6f8b796cf" />
+
 
 
 # ⚙️ Installation
